@@ -1,4 +1,4 @@
-## texttile to markdown
+## textile to markdown
 
 Reference: https://gist.github.com/yuumi3/d54ce99d1f15077ebaf8
 
