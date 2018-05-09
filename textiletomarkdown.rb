@@ -75,7 +75,7 @@ end
 #   end
 # end
 
-def convfile(input_filepath)
+def convfile(input_filepath, output_dirpath)
   s = []
   conv = []
   File.open(input_filepath, mode = "rt"){|f|
@@ -84,11 +84,19 @@ def convfile(input_filepath)
   s.each_with_index do |rec, ix|
     conv.push(textile_to_markdown(rec))
   end
-  #puts conv
+
   input_filename = File.basename(input_filepath, '.*')
-  File.open(input_filename + "_conv.txt", "w") do |f|
+  output_filename = input_filename + "_conv.txt"
+  output_filepath = File.join(output_dirpath, output_filename)
+  File.open(output_filepath, "w") do |f|
     conv.each { |s| f.puts(s) }
   end
 end
 
-convfile("./textile.txt")
+output_dirpath = "."
+
+if !ARGV[1].nil?
+  output_dirpath = ARGV[1]
+end
+
+convfile("./textile.txt", output_dirpath)
